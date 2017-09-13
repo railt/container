@@ -1,9 +1,9 @@
 {
-    "name": "railt/railt",
+    "name": "railt/container",
     "type": "library",
-    "description": "The Railt Framework.",
+    "description": "Simple Dependency Injection Container",
     "license": "MIT",
-    "keywords": [ "graphql", "idl", "otd", "ast", "framework", "railt", "application" ],
+    "keywords": [ "di", "container", "dependency injection", "ioc" ],
     "homepage": "http://railt.org",
     "support": {
         "issues": "https://github.com/railt/railt/issues",
@@ -17,49 +17,15 @@
     ],
     "require": {
         "php": ">=7.1",
-        "ext-mbstring": "*",
-        "psr/log": "~1.0",
-        "psr/container": "~1.0",
-        "railt/http": "self.version",
-        "railt/parser": "self.version",
-        "railt/routing": "self.version",
-        "railt/container": "self.version",
-        "railt/reflection": "self.version"
+        "psr/container": "~1.0"
     },
     "autoload": {
         "psr-4": {
-            "Railt\\": "src/Railt/"
+            "Railt\\Container\\": "/"
         }
-    },
-    "require-dev": {
-        "railt/webonyx-adapter": "self.version",
-        "webonyx/graphql-php": "~0.9",
-        "sami/sami": "~4.0",
-        "monolog/monolog": "~1.9",
-        "phpunit/phpunit": "~6.1",
-        "symfony/finder": "~2.8|3.*|4.*",
-        "illuminate/http": "~5.1",
-        "symfony/console": "~2.8|3.*|4.*",
-        "symfony/http-foundation": "~2.8|3.*|4.*"
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Railt\\Tests\\": "tests"
-        }
-    },
-    "suggest": {
-        "webonyx/graphql-php": "Webonyx GraphQL Adapter for Railt Framework (~self.version)."
     },
     "config": {
         "sort-packages": true
-    },
-    "bin": [
-        "bin/railt"
-    ],
-    "scripts": {
-        "post-create-project-cmd": [
-            "php bin/railt devel:init --force"
-        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
