@@ -21,11 +21,24 @@
     },
     "autoload": {
         "psr-4": {
-            "Railt\\Container\\": ""
+            "Railt\\Container\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "symfony/dependency-injection": "~3.0|~4.0",
+        "illuminate/container": "~5.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Railt\\Tests\\Container\\": "tests"
         }
     },
     "config": {
         "sort-packages": true
+    },
+    "provide": {
+        "psr/container": "~1.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
