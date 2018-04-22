@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 namespace Railt\Tests\Container;
+
 use Railt\Container\Container;
 use Railt\Container\Exceptions\ContainerResolutionException;
 
