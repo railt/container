@@ -45,8 +45,8 @@ class ResolvingTestCase extends TestCase
      * @dataProvider containerDataProvider
      *
      * @param ContainerInterface $container
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testInstanceResolvable(ContainerInterface $container): void
     {
@@ -60,13 +60,13 @@ class ResolvingTestCase extends TestCase
      * @dataProvider containerDataProvider
      *
      * @param ContainerInterface $container
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testSingletonResolvable(ContainerInterface $container): void
     {
         $container->register(\stdClass::class, function () {
-            $class = new \stdClass();
+            $class        = new \stdClass();
             $class->field = \random_int(\PHP_INT_MIN, \PHP_INT_MAX);
 
             return $class;
@@ -86,6 +86,8 @@ class ResolvingTestCase extends TestCase
      * @dataProvider containerDataProvider
      *
      * @param ContainerInterface $container
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testAutoResolvable(ContainerInterface $container): void
     {
@@ -98,6 +100,7 @@ class ResolvingTestCase extends TestCase
      * @param ContainerInterface $container
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testNotResolvable(ContainerInterface $container): void
     {
@@ -110,8 +113,8 @@ class ResolvingTestCase extends TestCase
      * @dataProvider containerDataProvider
      *
      * @param ContainerInterface $container
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testAliasResolvable(ContainerInterface $container): void
     {
@@ -135,6 +138,7 @@ class ResolvingTestCase extends TestCase
      * @param ContainerInterface $container
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testAliasNotResolvable(ContainerInterface $container): void
     {
@@ -149,6 +153,8 @@ class ResolvingTestCase extends TestCase
      * @dataProvider containerDataProvider
      *
      * @param ContainerInterface $container
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testAutowireable(ContainerInterface $container): void
     {
@@ -165,6 +171,8 @@ class ResolvingTestCase extends TestCase
      * @dataProvider containerDataProvider
      *
      * @param ContainerInterface $container
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUnresolvableAutowiring(ContainerInterface $container): void
     {
@@ -185,7 +193,7 @@ class ResolvingTestCase extends TestCase
      */
     public function testAutowiringWithAdditionalParameters(ContainerInterface $container): void
     {
-        [$i, $j]    = [\random_int(\PHP_INT_MIN, \PHP_INT_MAX), \random_int(\PHP_INT_MIN, \PHP_INT_MAX)];
+        [$i, $j] = [\random_int(\PHP_INT_MIN, \PHP_INT_MAX), \random_int(\PHP_INT_MIN, \PHP_INT_MAX)];
         $obj        = new \stdClass();
         $obj->value = \random_int(\PHP_INT_MIN, \PHP_INT_MAX);
 

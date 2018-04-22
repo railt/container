@@ -72,10 +72,6 @@ class Container implements ContainerInterface
     public function instance(string $locator, $instance): void
     {
         $this->resolved[$locator] = $instance;
-
-        $this->registered[$locator] = function () use ($instance) {
-            return $instance;
-        };
     }
 
     /**
@@ -93,6 +89,7 @@ class Container implements ContainerInterface
      * @return mixed
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \ReflectionException
      */
     public function get($id)
     {
@@ -145,7 +142,8 @@ class Container implements ContainerInterface
      */
     private function isRegistered(string $service): bool
     {
-        return \array_key_exists($service, $this->registered);
+        return \array_key_exists($service, $this->resolved) ||
+            \array_key_exists($service, $this->registered);
     }
 
     /**
@@ -183,6 +181,7 @@ class Container implements ContainerInterface
      * @param array $params
      * @return mixed
      * @throws \ReflectionException
+     * @throws Exceptions\ParameterResolutionException
      */
     public function call(callable $callable, array $params = [])
     {

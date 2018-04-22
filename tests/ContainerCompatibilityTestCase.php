@@ -22,6 +22,8 @@ class ContainerCompatibilityTestCase extends TestCase
 {
     /**
      * @return void
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testPSRCompatibility(): void
     {
@@ -30,6 +32,8 @@ class ContainerCompatibilityTestCase extends TestCase
 
     /**
      * @return void
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIsInterfaceCompatibility(): void
     {
@@ -38,6 +42,8 @@ class ContainerCompatibilityTestCase extends TestCase
 
     /**
      * @return void
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIsAutowireable(): void
     {
@@ -46,6 +52,8 @@ class ContainerCompatibilityTestCase extends TestCase
 
     /**
      * @return void
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testIsRegistrable(): void
     {

@@ -119,7 +119,7 @@ class ParamResolver
         }
 
         if ($parameter->isVariadic()) {
-            return;
+            return null;
         }
 
         $error = \vsprintf('Can not resolve parameter %s([#%s => %s])', [
