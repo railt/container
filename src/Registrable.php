@@ -17,21 +17,21 @@ interface Registrable
     /**
      * @param string $locator
      * @param \Closure $resolver
-     * @return void
+     * @return Registrable|$this
      */
-    public function register(string $locator, \Closure $resolver): void;
+    public function register(string $locator, \Closure $resolver): Registrable;
 
     /**
      * @param string $locator
      * @param object $instance
-     * @return void
+     * @return Registrable|$this
      */
-    public function instance(string $locator, $instance): void;
+    public function instance(string $locator, $instance): Registrable;
 
     /**
      * @param string $locator
-     * @param string $alias
-     * @return void
+     * @param string ...$aliases
+     * @return Registrable|$this
      */
-    public function alias(string $locator, string $alias): void;
+    public function alias(string $locator, string ...$aliases): Registrable;
 }

@@ -9,11 +9,12 @@ declare(strict_types=1);
 
 namespace Railt\Container;
 
-use Psr\Container\ContainerInterface as PSRContainer;
+use Psr\Container\ContainerInterface as PsrContainer;
 
 /**
  * Interface ContainerInterface
  */
-interface ContainerInterface extends PSRContainer, Autowireable, Registrable
+interface ContainerInterface extends PsrContainer, Registrable, Autowireable
 {
+
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Railt\Container;
 
-use Railt\Container\Exceptions\ParameterResolutionException;
+use Railt\Container\Exception\ParameterResolutionException;
 
 /**
  * Class ParamResolver

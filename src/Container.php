@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace Railt\Container;
 
 use Psr\Container\ContainerInterface as PSRContainer;
-use Railt\Container\Exceptions\ContainerResolutionException;
+use Railt\Container\Exception\ContainerResolutionException;
 
 /**
  * Class Container
@@ -57,31 +57,39 @@ class Container implements ContainerInterface
     /**
      * @param string $class
      * @param \Closure $resolver
-     * @return void
+     * @return Registrable|$this
      */
-    public function register(string $class, \Closure $resolver): void
+    public function register(string $class, \Closure $resolver): Registrable
     {
         $this->registered[$class] = $resolver;
+
+        return $this;
     }
 
     /**
      * @param string $locator
      * @param object $instance
-     * @return void
+     * @return Registrable|$this
      */
-    public function instance(string $locator, $instance): void
+    public function instance(string $locator, $instance): Registrable
     {
         $this->resolved[$locator] = $instance;
+
+        return $this;
     }
 
     /**
      * @param string $original
-     * @param string $alias
-     * @return void
+     * @param string ...$aliases
+     * @return Registrable|$this
      */
-    public function alias(string $original, string $alias): void
+    public function alias(string $original, string ...$aliases): Registrable
     {
-        $this->aliases[$alias] = $original;
+        foreach ($aliases as $alias) {
+            $this->aliases[$alias] = $original;
+        }
+
+        return $this;
     }
 
     /**
@@ -158,7 +166,7 @@ class Container implements ContainerInterface
     /**
      * @param string $id
      * @return mixed|object
-     * @throws \Railt\Container\Exceptions\ContainerResolutionException
+     * @throws ContainerResolutionException
      * @throws \ReflectionException
      */
     private function resolve(string $id)
@@ -181,7 +189,6 @@ class Container implements ContainerInterface
      * @param array $params
      * @return mixed
      * @throws \ReflectionException
-     * @throws Exceptions\ParameterResolutionException
      */
     public function call(callable $callable, array $params = [])
     {

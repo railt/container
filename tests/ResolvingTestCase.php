@@ -12,7 +12,7 @@ namespace Railt\Tests\Container;
 use Psr\Container\NotFoundExceptionInterface;
 use Railt\Container\Container;
 use Railt\Container\ContainerInterface;
-use Railt\Container\Exceptions\ParameterResolutionException;
+use Railt\Container\Exception\ParameterResolutionException;
 
 /**
  * Class ResolvingTestCase

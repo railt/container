@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Container\Exceptions;
+namespace Railt\Container\Exception;
 
 use Psr\Container\NotFoundExceptionInterface;
 
