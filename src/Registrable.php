@@ -19,19 +19,19 @@ interface Registrable
      * @param \Closure $resolver
      * @return Registrable|$this
      */
-    public function register(string $locator, \Closure $resolver): Registrable;
+    public function register(string $locator, \Closure $resolver): self;
 
     /**
      * @param string $locator
      * @param object $instance
      * @return Registrable|$this
      */
-    public function instance(string $locator, $instance): Registrable;
+    public function instance(string $locator, $instance): self;
 
     /**
      * @param string $locator
      * @param string ...$aliases
      * @return Registrable|$this
      */
-    public function alias(string $locator, string ...$aliases): Registrable;
+    public function alias(string $locator, string ...$aliases): self;
 }

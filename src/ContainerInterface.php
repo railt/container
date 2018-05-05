@@ -16,5 +16,4 @@ use Psr\Container\ContainerInterface as PsrContainer;
  */
 interface ContainerInterface extends PsrContainer, Registrable, Autowireable
 {
-
 }

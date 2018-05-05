@@ -21,7 +21,7 @@ interface ContainsEvents
      * @param \Closure $then
      * @return ContainsEvents
      */
-    public function resolving(string $locator, \Closure $then): ContainsEvents;
+    public function resolving(string $locator, \Closure $then): self;
 
     /**
      * The event is triggered after the desired item is initialized.
@@ -30,7 +30,7 @@ interface ContainsEvents
      * @param \Closure $then
      * @return ContainsEvents
      */
-    public function resolved(string $locator, \Closure $then): ContainsEvents;
+    public function resolved(string $locator, \Closure $then): self;
 
     /**
      * The event is triggered before the desired item is received from the container.
@@ -39,7 +39,7 @@ interface ContainsEvents
      * @param \Closure $then
      * @return ContainsEvents
      */
-    public function fetching(string $locator, \Closure $then): ContainsEvents;
+    public function fetching(string $locator, \Closure $then): self;
 
     /**
      * The event is triggered after the desired item is received from the container.
@@ -48,5 +48,5 @@ interface ContainsEvents
      * @param \Closure $then
      * @return ContainsEvents
      */
-    public function fetched(string $locator, \Closure $then): ContainsEvents;
+    public function fetched(string $locator, \Closure $then): self;
 }
