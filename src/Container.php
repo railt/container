@@ -215,10 +215,6 @@ class Container implements ContainerInterface
             return $this->get($class);
         }
 
-        $this->register($class, function () use ($class, $params) {
-            return new $class(...$this->resolver->fromConstructor($class, $params));
-        });
-
-        return $this->resolve($class);
+        return new $class(...$this->resolver->fromConstructor($class, $params));
     }
 }
