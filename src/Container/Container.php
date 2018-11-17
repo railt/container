@@ -166,7 +166,7 @@ class Container implements ContainerInterface
     /**
      * @param string $id
      * @return mixed|object
-     * @throws ContainerResolutionException
+     * @throws \Railt\Container\Exception\ContainerResolutionException
      * @throws \ReflectionException
      */
     private function resolve(string $id)
@@ -188,6 +188,7 @@ class Container implements ContainerInterface
      * @param callable $callable
      * @param array $params
      * @return mixed
+     * @throws \Railt\Container\Exception\ParameterResolutionException
      * @throws \ReflectionException
      */
     public function call(callable $callable, array $params = [])

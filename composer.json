@@ -2,8 +2,14 @@
     "name": "railt/container",
     "type": "library",
     "description": "Simple Dependency Injection Container",
+    "version": "1.3.0",
     "license": "MIT",
-    "keywords": [ "di", "container", "dependency injection", "ioc" ],
+    "keywords": [
+        "di",
+        "container",
+        "dependency injection",
+        "ioc"
+    ],
     "homepage": "http://railt.org",
     "support": {
         "issues": "https://github.com/railt/railt/issues",
@@ -21,11 +27,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Railt\\Container\\": "src/"
+            "Railt\\": "src/"
         }
     },
     "require-dev": {
-        "symfony/dependency-injection": "~3.3|~4.0",
+        "symfony/dependency-injection": "~3.4|~4.0",
         "illuminate/container": "~5.5",
         "phpunit/phpunit": "^6.5"
     },

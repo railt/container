@@ -172,7 +172,6 @@ class ResolvingTestCase extends TestCase
      *
      * @param ContainerInterface $container
      * @throws \PHPUnit\Framework\Exception
-     * @throws \PHPUnit\Framework\ExpectationFailedException
      */
     public function testUnresolvableAutowiring(ContainerInterface $container): void
     {
@@ -202,7 +201,7 @@ class ResolvingTestCase extends TestCase
 
         $result = $container->call(function (\stdClass $c, int $a1, int $a2): string {
             return $c->value . ' ' . $a1 . ' ' . $a2;
-        }, ['a1' => $i, 'a2' => $j]);
+        }, ['$a1' => $i, '$a2' => $j]);
 
         $this->assertSame($obj->value . ' ' . $i . ' ' . $j, $result);
     }
