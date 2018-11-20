@@ -158,7 +158,7 @@ class Container implements ContainerInterface
      * @param string $id
      * @return bool
      */
-    private function isResolved(string $id): bool
+    protected function isResolved(string $id): bool
     {
         return \array_key_exists($id, $this->resolved);
     }
@@ -169,7 +169,7 @@ class Container implements ContainerInterface
      * @throws \Railt\Container\Exception\ContainerResolutionException
      * @throws \ReflectionException
      */
-    private function resolve(string $id)
+    protected function resolve(string $id)
     {
         $locator = $this->getLocator($id);
 
