@@ -9,10 +9,8 @@ declare(strict_types=1);
 
 namespace Railt\Tests\Container;
 
-use Illuminate\Container\Container as IlluminateContainer;
 use Railt\Container\Container;
 use Railt\Container\Exception\ContainerResolutionException;
-use Symfony\Component\DependencyInjection\Container as SymfonyContainer;
 
 /**
  * Class ProxyResolvingTestCase
@@ -26,25 +24,19 @@ class ProxyResolvingTestCase extends TestCase
     public function containerDataProvider(): array
     {
         // Prepare Symfony DI Container
-        $symfony = new SymfonyContainer();
+        $symfony = new \Symfony\Component\DependencyInjection\Container();
         $symfony->set('locator', new \stdClass());
         $symfony->set(\stdClass::class, new \stdClass());
 
         // Prepare Laravel DI Container
-        $laravel = new IlluminateContainer();
+        $laravel = new \Illuminate\Container\Container();
         $laravel->instance('locator', new \stdClass());
         $laravel->instance(\stdClass::class, new \stdClass());
 
-        // Prepare Self DI Container
-        $railt = new Container();
-        $railt->instance('locator', new \stdClass());
-        $railt->instance(\stdClass::class, new \stdClass());
-
         // Providers
         return [
-            'Symfony' => [new Container($symfony)],
-            'Laravel' => [new Container($laravel)],
-            'Railt'   => [new Container($railt)],
+            [new Container($symfony)],
+            [new Container($laravel)],
         ];
     }
 
