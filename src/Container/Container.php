@@ -63,10 +63,6 @@ class Container implements ContainerInterface
     {
         $this->registered[$class] = $resolver;
 
-        if (isset($this->resolved[$class])) {
-            unset($this->resolved[$class]);
-        }
-
         return $this;
     }
 
@@ -154,10 +150,7 @@ class Container implements ContainerInterface
      */
     private function isRegistered(string $service): bool
     {
-        return
-            isset($this->resolved[$service]) ||
-            isset($this->registered[$service]) ||
-            \array_key_exists($service, $this->resolved) ||
+        return \array_key_exists($service, $this->resolved) ||
             \array_key_exists($service, $this->registered);
     }
 
@@ -165,20 +158,18 @@ class Container implements ContainerInterface
      * @param string $id
      * @return bool
      */
-    protected function isResolved(string $id): bool
+    private function isResolved(string $id): bool
     {
-        return
-            isset($this->resolved[$id]) ||
-            \array_key_exists($id, $this->resolved);
+        return \array_key_exists($id, $this->resolved);
     }
 
     /**
      * @param string $id
      * @return mixed|object
-     * @throws \Railt\Container\Exception\ContainerResolutionException
+     * @throws ContainerResolutionException
      * @throws \ReflectionException
      */
-    protected function resolve(string $id)
+    private function resolve(string $id)
     {
         $locator = $this->getLocator($id);
 
@@ -211,23 +202,19 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @param string $locator
+     * @param string $class
      * @param array $params
      * @return mixed|object
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \ReflectionException
-     * @throws \Railt\Container\Exception\ContainerResolutionException
      */
-    public function make(string $locator, array $params = [])
+    public function make(string $class, array $params = [])
     {
-        if ($this->has($locator)) {
-            return $this->get($locator);
+        if ($this->has($class)) {
+            return $this->get($class);
         }
 
-        if (! \class_exists($locator)) {
-            $error = \sprintf('Class %s not found or cannot be instantiated', $locator);
-            throw new ContainerResolutionException($error);
-        }
-
-        return new $locator(...$this->resolver->fromConstructor($locator, $params));
+        return new $class(...$this->resolver->fromConstructor($class, $params));
     }
 }
