@@ -192,8 +192,8 @@ class ResolvingTestCase extends TestCase
      */
     public function testAutowiringWithAdditionalParameters(ContainerInterface $container): void
     {
-        [$i, $j]    = [\random_int(\PHP_INT_MIN, \PHP_INT_MAX), \random_int(\PHP_INT_MIN, \PHP_INT_MAX)];
-        $obj        = new \stdClass();
+        [$i, $j] = [\random_int(\PHP_INT_MIN, \PHP_INT_MAX), \random_int(\PHP_INT_MIN, \PHP_INT_MAX)];
+        $obj = new \stdClass();
         $obj->value = \random_int(\PHP_INT_MIN, \PHP_INT_MAX);
 
         $container->instance(\stdClass::class, $obj);
