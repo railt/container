@@ -57,7 +57,7 @@ class Container implements ContainerInterface
         $this->parent = $parent;
         $this->instance(ContainerInterface::class, $this);
 
-        $this->params = new ParamResolver($this);
+        $this->params    = new ParamResolver($this);
         $this->signature = new SignatureResolver($this);
     }
 
