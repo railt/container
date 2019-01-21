@@ -57,7 +57,7 @@ class Container implements ContainerInterface
         $this->parent = $parent;
         $this->instance(ContainerInterface::class, $this);
 
-        $this->params = new ParamResolver($this);
+        $this->params    = new ParamResolver($this);
         $this->signature = new SignatureResolver($this);
     }
 
@@ -229,7 +229,7 @@ class Container implements ContainerInterface
         try {
             $callable = $this->signature->resolve($callable, $params);
             $resolved = $this->params->fromClosure($callable, $params);
-        } catch (\ReflectionException|\InvalidArgumentException $e) {
+        } catch (\ReflectionException | \InvalidArgumentException $e) {
             throw new ContainerResolutionException($e->getMessage(), $e->getCode(), $e);
         }
 
