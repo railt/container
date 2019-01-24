@@ -23,14 +23,13 @@ class SimpleContainer implements PsrContainer
     private $values = [];
 
     /**
-     * @var PsrContainer|null
+     * @var null|PsrContainer
      */
     private $container;
 
     /**
      * SimpleContainer constructor.
-     *
-     * @param PsrContainer|null $container
+     * @param PsrContainer|null $container Fallback container
      */
     public function __construct(PsrContainer $container = null)
     {

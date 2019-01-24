@@ -15,11 +15,11 @@ namespace Railt\Container;
 interface Autowireable
 {
     /**
-     * @param callable|\Closure|mixed $callable
+     * @param callable $callable
      * @param array $params
      * @return mixed
      */
-    public function call($callable, array $params = []);
+    public function call(callable $callable, array $params = []);
 
     /**
      * @param string $class

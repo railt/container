@@ -33,23 +33,17 @@ class Container implements ContainerInterface
     private $aliases = [];
 
     /**
-     * @var PSRContainer|null
+     * @var null|PSRContainer
      */
     private $parent;
 
     /**
      * @var ParamResolver
      */
-    private $params;
-
-    /**
-     * @var SignatureResolver
-     */
-    private $signature;
+    private $resolver;
 
     /**
      * Container constructor.
-     *
      * @param PSRContainer|null $parent
      */
     public function __construct(PSRContainer $parent = null)
@@ -57,20 +51,7 @@ class Container implements ContainerInterface
         $this->parent = $parent;
         $this->instance(ContainerInterface::class, $this);
 
-        $this->params    = new ParamResolver($this);
-        $this->signature = new SignatureResolver($this);
-    }
-
-    /**
-     * @param string $locator
-     * @param mixed|object $instance
-     * @return Registrable|$this
-     */
-    public function instance(string $locator, $instance): Registrable
-    {
-        $this->resolved[$locator] = $instance;
-
-        return $this;
+        $this->resolver = new ParamResolver($this);
     }
 
     /**
@@ -82,9 +63,17 @@ class Container implements ContainerInterface
     {
         $this->registered[$class] = $resolver;
 
-        if (isset($this->resolved[$class])) {
-            unset($this->resolved[$class]);
-        }
+        return $this;
+    }
+
+    /**
+     * @param string $locator
+     * @param object $instance
+     * @return Registrable|$this
+     */
+    public function instance(string $locator, $instance): Registrable
+    {
+        $this->resolved[$locator] = $instance;
 
         return $this;
     }
@@ -104,27 +93,31 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @param string $locator
-     * @param array $params
-     * @return mixed|object
-     * @throws ContainerResolutionException
+     * @param string $id
+     * @return mixed
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \ReflectionException
      */
-    public function make(string $locator, array $params = [])
+    public function get($id)
     {
-        if ($this->has($locator)) {
-            return $this->get($locator);
+        $locator = $this->getLocator($id);
+
+        if ($this->isRegistered($locator)) {
+            return $this->resolve($locator);
         }
 
-        if (! \class_exists($locator)) {
-            $error = \sprintf('Class %s not found or cannot be instantiated', $locator);
-            throw new ContainerResolutionException($error);
+        if ($this->parent && $this->parent->has($locator)) {
+            return $this->parent->get($locator);
         }
 
-        try {
-            return new $locator(...$this->params->fromConstructor($locator, $params));
-        } catch (\ReflectionException $e) {
-            throw new ContainerResolutionException($e->getMessage(), $e->getCode(), $e);
+        $error = \sprintf('"%s" entry is not registered', $id);
+
+        if ($id !== $locator) {
+            $error = \sprintf('"%s" entry defined as "%s" is not registered', $id, $locator);
         }
+
+        throw new ContainerResolutionException($error);
     }
 
     /**
@@ -157,44 +150,26 @@ class Container implements ContainerInterface
      */
     private function isRegistered(string $service): bool
     {
-        return isset($this->resolved[$service])
-            || isset($this->registered[$service])
-            || \array_key_exists($service, $this->resolved)
-            || \array_key_exists($service, $this->registered);
+        return \array_key_exists($service, $this->resolved) ||
+            \array_key_exists($service, $this->registered);
     }
 
     /**
      * @param string $id
-     * @return mixed|object
-     * @throws ContainerResolutionException
+     * @return bool
      */
-    public function get($id)
+    private function isResolved(string $id): bool
     {
-        $locator = $this->getLocator($id);
-
-        if ($this->isRegistered($locator)) {
-            return $this->resolve($locator);
-        }
-
-        if ($this->parent && $this->parent->has($locator)) {
-            return $this->parent->get($locator);
-        }
-
-        $error = \sprintf('"%s" entry is not registered', $id);
-
-        if ($id !== $locator) {
-            $error = \sprintf('"%s" entry defined as "%s" is not registered', $id, $locator);
-        }
-
-        throw new ContainerResolutionException($error);
+        return \array_key_exists($id, $this->resolved);
     }
 
     /**
      * @param string $id
      * @return mixed|object
      * @throws ContainerResolutionException
+     * @throws \ReflectionException
      */
-    protected function resolve(string $id)
+    private function resolve(string $id)
     {
         $locator = $this->getLocator($id);
 
@@ -210,29 +185,36 @@ class Container implements ContainerInterface
     }
 
     /**
-     * @param string $id
-     * @return bool
+     * @param callable $callable
+     * @param array $params
+     * @return mixed
+     * @throws \ReflectionException
      */
-    protected function isResolved(string $id): bool
+    public function call(callable $callable, array $params = [])
     {
-        return isset($this->resolved[$id]) || \array_key_exists($id, $this->resolved);
+        if (! ($callable instanceof \Closure)) {
+            $callable = \Closure::fromCallable($callable);
+        }
+
+        $resolved = $this->resolver->fromClosure($callable, $params);
+
+        return \call_user_func_array($callable, $resolved);
     }
 
     /**
-     * @param callable|\Closure|mixed $callable
+     * @param string $class
      * @param array $params
-     * @return mixed
-     * @throws ContainerResolutionException
+     * @return mixed|object
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws \ReflectionException
      */
-    public function call($callable, array $params = [])
+    public function make(string $class, array $params = [])
     {
-        try {
-            $callable = $this->signature->resolve($callable, $params);
-            $resolved = $this->params->fromClosure($callable, $params);
-        } catch (\ReflectionException | \InvalidArgumentException $e) {
-            throw new ContainerResolutionException($e->getMessage(), $e->getCode(), $e);
+        if ($this->has($class)) {
+            return $this->get($class);
         }
 
-        return \call_user_func_array($callable, $resolved);
+        return new $class(...$this->resolver->fromConstructor($class, $params));
     }
 }

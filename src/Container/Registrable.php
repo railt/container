@@ -23,10 +23,10 @@ interface Registrable
 
     /**
      * @param string $locator
-     * @param object|mixed $value
+     * @param object $instance
      * @return Registrable|$this
      */
-    public function instance(string $locator, $value): self;
+    public function instance(string $locator, $instance): self;
 
     /**
      * @param string $locator
