@@ -56,8 +56,8 @@ class Container implements ContainerInterface
      */
     public function __construct(PSRContainer $parent = null)
     {
-        $this->parent    = $parent;
-        $this->params    = new ParamResolver($this);
+        $this->parent = $parent;
+        $this->params = new ParamResolver($this);
         $this->signature = new SignatureResolver($this);
     }
 
