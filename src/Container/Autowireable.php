@@ -7,10 +7,10 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Container;
+namespace Railt\Component\Container;
 
-use Railt\Container\Exception\ContainerInvocationException;
-use Railt\Container\Exception\ContainerResolutionException;
+use Railt\Component\Container\Exception\ContainerInvocationException;
+use Railt\Component\Container\Exception\ContainerResolutionException;
 
 /**
  * Interface Autowireable

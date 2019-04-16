@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Container\SignatureResolver;
+namespace Railt\Component\Container\SignatureResolver;
 
 /**
  * Class CallableStaticMethodFetcher

@@ -7,17 +7,17 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Container;
+namespace Railt\Component\Container;
 
-use Railt\Container\Exception\ContainerInvocationException;
-use Railt\Container\SignatureResolver\CallableArrayFetcher;
-use Railt\Container\SignatureResolver\CallableFunctionFetcher;
-use Railt\Container\SignatureResolver\CallableStaticMethodFetcher;
-use Railt\Container\SignatureResolver\ClosureFetcher;
-use Railt\Container\SignatureResolver\FetcherInterface;
-use Railt\Container\SignatureResolver\InstanceMethodFetcher;
-use Railt\Container\SignatureResolver\InvocableClassFetcher;
-use Railt\Container\SignatureResolver\InvocableObjectFetcher;
+use Railt\Component\Container\Exception\ContainerInvocationException;
+use Railt\Component\Container\SignatureResolver\CallableArrayFetcher;
+use Railt\Component\Container\SignatureResolver\CallableFunctionFetcher;
+use Railt\Component\Container\SignatureResolver\CallableStaticMethodFetcher;
+use Railt\Component\Container\SignatureResolver\ClosureFetcher;
+use Railt\Component\Container\SignatureResolver\FetcherInterface;
+use Railt\Component\Container\SignatureResolver\InstanceMethodFetcher;
+use Railt\Component\Container\SignatureResolver\InvocableClassFetcher;
+use Railt\Component\Container\SignatureResolver\InvocableObjectFetcher;
 
 /**
  * Class SignatureResolver

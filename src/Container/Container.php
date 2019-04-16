@@ -7,12 +7,12 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Container;
+namespace Railt\Component\Container;
 
 use Psr\Container\ContainerInterface as PSRContainer;
-use Railt\Container\Exception\ContainerInvocationException;
-use Railt\Container\Exception\ContainerResolutionException;
-use Railt\Container\Exception\ParameterResolutionException;
+use Railt\Component\Container\Exception\ContainerInvocationException;
+use Railt\Component\Container\Exception\ContainerResolutionException;
+use Railt\Component\Container\Exception\ParameterResolutionException;
 
 /**
  * Class Container
