@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container\Exception;
+namespace Railt\Container\Exception;
 
 use Psr\Container\ContainerExceptionInterface;
 

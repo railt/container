@@ -7,10 +7,10 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container\Container;
+namespace Railt\Container\Container;
 
-use Railt\Component\Container\Exception\ContainerResolutionException;
-use Railt\Component\Container\Exception\InvalidArgumentException;
+use Railt\Container\Exception\ContainerResolutionException;
+use Railt\Container\Exception\InvalidArgumentException;
 
 /**
  * Trait AliasesTrait

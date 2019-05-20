@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container\SignatureResolver;
+namespace Railt\Container\SignatureResolver;
 
 /**
  * Interface FetcherInterface

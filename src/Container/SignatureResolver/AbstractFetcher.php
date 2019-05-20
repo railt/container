@@ -7,11 +7,11 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container\SignatureResolver;
+namespace Railt\Container\SignatureResolver;
 
-use Railt\Component\Container\ContainerInterface;
-use Railt\Component\Container\Exception\ContainerInvocationException;
-use Railt\Component\Container\SignatureResolver;
+use Railt\Container\ContainerInterface;
+use Railt\Container\Exception\ContainerInvocationException;
+use Railt\Container\SignatureResolver;
 
 /**
  * Class AbstractFetcher

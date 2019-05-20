@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container\Container;
+namespace Railt\Container\Container;
 
 /**
  * Interface Aliased

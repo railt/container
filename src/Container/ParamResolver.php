@@ -7,10 +7,10 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container;
+namespace Railt\Container;
 
-use Railt\Component\Container\Exception\ParameterResolutionException;
-use Railt\Component\Dumper\TypeDumper;
+use Railt\Container\Exception\ParameterResolutionException;
+use Railt\Dumper\TypeDumper;
 
 /**
  * Class ParamResolver

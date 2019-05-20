@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container;
+namespace Railt\Container;
 
 use Psr\Container\ContainerInterface as PsrContainer;
 

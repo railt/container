@@ -7,10 +7,10 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Container\SignatureResolver;
+namespace Railt\Container\SignatureResolver;
 
-use Railt\Component\Container\Exception\ContainerInvocationException;
-use Railt\Component\Container\Exception\ContainerResolutionException;
+use Railt\Container\Exception\ContainerInvocationException;
+use Railt\Container\Exception\ContainerResolutionException;
 
 /**
  * Class InvocableClassFetcher
