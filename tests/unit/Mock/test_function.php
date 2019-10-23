@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of Railt package.
  *
@@ -7,13 +8,9 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Container;
+namespace Railt\Container\Tests\Unit;
 
-use Psr\Container\ContainerInterface as PsrContainer;
-
-/**
- * Interface ContainerInterface
- */
-interface ContainerInterface extends PsrContainer, Registrable, Autowireable
+function __test($argument)
 {
+    return $argument;
 }

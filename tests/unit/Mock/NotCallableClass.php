@@ -8,13 +8,8 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Container\Tests\Unit;
+namespace Railt\Container\Tests\Unit\Mock;
 
-use PHPUnit\Framework\TestCase as BaseTestCase;
-
-/**
- * Class TestCase
- */
-abstract class TestCase extends BaseTestCase
+class NotCallableClass
 {
 }
