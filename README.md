@@ -15,6 +15,8 @@
     <a href="https://raw.githubusercontent.com/railt/container/1.4.x/LICENSE.md"><img src="https://poser.pugx.org/railt/container/license" alt="License MIT"></a>
 </p>
 
+> This package is **deprecated**
+
 # Container
 
 > Note: All questions and issues please send 
